@@ -19,7 +19,8 @@ module ALU(A,B,Result,ALUControl,OverFlow,Carry,Zero,Negative);
                     (ALUControl == 3'b001) ? Sum :
                     (ALUControl == 3'b010) ? A & B :
                     (ALUControl == 3'b011) ? A | B :
-                    (ALUControl == 3'b101) ? {{31{1'b0}},(Sum[31])} : {32{1'b0}};
+                    // Change (Sum[31]) to your corrected slt wire!
+                    (ALUControl == 3'b101) ? {{31{1'b0}}, slt} : {32{1'b0}};
     
     assign OverFlow = ((Sum[31] ^ A[31]) & 
                       (~(ALUControl[0] ^ B[31] ^ A[31])) &
